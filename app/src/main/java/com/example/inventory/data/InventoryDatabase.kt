@@ -27,9 +27,18 @@ abstract class InventoryDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): InventoryDatabase{
             // if the Instance is not null, return it, otherwise create a new database instance.
+
+            /*
+            Multiple threads can potentially ask for a database instance at the same time, which results
+            in two databases instead of one. This issue is known as a race condition. Wrapping the code
+            to get the database inside a synchronized block means that only one thread of execution at
+            a time can enter this block of code, which makes sure the database only gets initialized
+            once. Use synchronized{} block to avoid the race condition.
+             */
             return Instance?: synchronized(this){
                 Room.databaseBuilder(context, InventoryDatabase::class.java, "item_database")
                     .build()
+                    // keep a reference to the recently created db instance.
                     .also { Instance = it }
             }
         }
