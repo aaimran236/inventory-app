@@ -24,8 +24,22 @@ import androidx.room.PrimaryKey
  * Entity data class represents a single row in the database.
  */
 
-@Entity(tableName ="items")
+/*
+To ensure consistency and meaningful behavior of the generated code, data classes must fulfill the
+following requirements:
+
+The primary constructor must have at least one parameter.
+All primary constructor parameters must be val or var.
+Data classes cannot be abstract, open, or sealed.
+ */
+
+/*
+By default (no arguments to @Entity), the table name is the same as the class name.
+Use the tableName argument to customize the table name.
+ */
+@Entity(tableName = "items")
 data class Item(
+    ///After the app assigns a primary key, it cannot be modified
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
