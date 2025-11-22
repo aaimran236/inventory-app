@@ -87,6 +87,14 @@ fun ItemEntryScreen(
             itemUiState = viewModel.itemUiState,
             /// updateUiState lambda are being passed as function parameters
             onItemValueChange = viewModel::updateUiState,
+
+            /*
+            Notice that you did not use viewModelScope.launch() for saveItem() in the
+            ItemEntryViewModel.kt file, but it is necessary for ItemEntryBody() when you
+            call a repository method. You can only call suspend functions from a coroutine
+            or another suspend function. 
+            The function viewModel.saveItem() is a suspend function.
+             */
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.saveItem()

@@ -53,7 +53,7 @@ class ItemEntryViewModel(
     }
 
     suspend fun saveItem(){
-        if(itemUiState.isEntryValid){
+        if(validateInput()){
             itemsRepository.insertItem(itemUiState.itemDetails.toItem())
         }
     }
