@@ -47,6 +47,7 @@ class ItemDaoTest {
     private var item1 = Item(1, "Apples", 10.0, 20)
     private var item2 = Item(2, "Bananas", 15.0, 97)
 
+    ///utility functions
     private suspend fun addOneItemToDb() {
         itemDao.insert(item1)
     }
